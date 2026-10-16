@@ -86,16 +86,6 @@ sd.GetCustomParam()
 - `github.com/eclipse/paho.mqtt.golang` — MQTT 客户端（部分驱动用）
 - `go.uber.org/zap` — 日志
 
-## 与上游的差异
-
-fork 自 `github.com/winc-link/hummingbird-sdk-go`，改动：
-
-- 模块路径改为 `github.com/LMgateways/iotserver-sdk-go`；
-- 依赖从 `winc-link/edge-driver-proto` 换为 `LMgateways/iotserver-driver-proto`；
-- 升级 grpc / protobuf 依赖版本。
-
-**API 与上游一致**，驱动代码从上游 SDK 迁移过来只需改 import 路径。
-
 ## 参考实现
 
 本组织下的三个协议驱动即基于本 SDK：
