@@ -36,11 +36,11 @@ import (
 	"github.com/LMgateways/iotserver-sdk-go/internal/snowflake"
 	"github.com/LMgateways/iotserver-sdk-go/model"
 
-	mqtt "github.com/eclipse/paho.mqtt.golang"
 	"github.com/LMgateways/iotserver-driver-proto/cloudinstance"
 	"github.com/LMgateways/iotserver-driver-proto/drivercommon"
 	"github.com/LMgateways/iotserver-driver-proto/driverdevice"
 	driverstorage "github.com/LMgateways/iotserver-driver-proto/driverstorge"
+	mqtt "github.com/eclipse/paho.mqtt.golang"
 	"google.golang.org/grpc/status"
 )
 
@@ -88,12 +88,12 @@ func NewDriverService(serviceName string, iotPlatform commons.IotPlatform) *Driv
 
 	// Start rpc client
 	if coreClient, err = client.NewCoreClient(cfg.Clients[config.Core]); err != nil {
-		log.Errorf("new resource client error: %rpcServer", err)
+		log.Errorf("new resource client error: %v", err)
 		os.Exit(-1)
 	}
 	// Snowflake node
 	if node, err = snowflake.NewWorker(1); err != nil {
-		log.Errorf("new msg id generator error: %rpcServer", err)
+		log.Errorf("new msg id generator error: %v", err)
 		os.Exit(-1)
 	}
 
@@ -171,7 +171,7 @@ func (d *DriverService) buildRpcBaseMessage() error {
 func (d *DriverService) initCache() error {
 	// Sync device
 	if deviceCache, err := cache.InitDeviceCache(d.baseMessage, d.rpcClient, d.logger); err != nil {
-		d.logger.Errorf("sync device error: %rpcServer", err)
+		d.logger.Errorf("sync device error: %v", err)
 		os.Exit(-1)
 	} else {
 		d.deviceCache = deviceCache
@@ -179,7 +179,7 @@ func (d *DriverService) initCache() error {
 
 	// Sync product
 	if productCache, err := cache.InitProductCache(d.baseMessage, d.rpcClient, d.logger); err != nil {
-		d.logger.Errorf("sync tsl error: %s rpcServer", err)
+		d.logger.Errorf("sync tsl error: %s", err)
 		os.Exit(-1)
 	} else {
 		d.productCache = productCache
